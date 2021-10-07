@@ -184,10 +184,15 @@
     
     // ButtonAがクリックされた時の処理
     function btnAClick(e){
-      active = true;
-      startTime = new Date();
+
       $('#btnB').prop("disabled", false);
       $('#btnC').prop("disabled", false);
+      if (startTime != 0){
+        active = true;
+      } else {
+        active = true;
+        startTime = new Date();
+      }
     }
 
     // ButtonBがクリックされた時の処理
@@ -223,6 +228,17 @@
             active = false;
             alarm();
           }
+          //発展D
+          var mstr = "分: ";
+          for (let i = 0; i<m;i++){
+              mstr += "〇";
+          }
+          var secstr = "妙: ";
+          for (let i = 0; i<(s%10);i++){
+              secstr += "〇";
+          }
+          $("#minuteStr").html(mstr);
+          $("#secondStr").html(secstr);
         }
     } 
 
