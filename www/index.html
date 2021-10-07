@@ -193,7 +193,8 @@
     // ButtonBがクリックされた時の処理
     function btnBClick(e){
       active = false;
-        
+      $('#btnB').prop('disabled', true);
+      $('#btnC').prop('disabled', true);
     }
 
     // ButtonCがクリックされた時の処理
@@ -203,6 +204,8 @@
         period = 60*parseInt($("#minute").val()) + parseInt($("#second").val());
         $("#time").html("経過時間：0");
         $("#remain").html("残り時間： "+period);
+        $('#btnB').prop('disabled', true);
+        $('#btnC').prop('disabled', true);
     }
     
 
