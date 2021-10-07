@@ -159,9 +159,9 @@
     // ボタンの初期設定
     function init(){
         $('#btnA').prop('disabled', false);
-        $('#btnB').prop('disabled', false);
-        $('#btnC').prop('disabled', false);
-        
+        $('#btnB').prop('disabled', true);
+        $('#btnC').prop('disabled', true);
+        btnCClick(null);
     }
 
     // Alarmの処理
@@ -178,7 +178,9 @@
         var audio = new Audio();
         audio.src = "pin.wav";
         audio.play(); 
-
+        //発展A
+        $('#btnB').prop('disabled', false);
+        $('#btnC').prop('disabled', false);
     }
     
     // ButtonAがクリックされた時の処理
