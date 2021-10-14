@@ -85,3 +85,7 @@
     
     input[type=number] {text-align: right;}
 
+    #time::after{
+      content: "妙";
+    }
+
