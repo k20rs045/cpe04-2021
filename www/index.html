@@ -183,19 +183,22 @@
     }
     
     // ButtonAがクリックされた時の処理
+    //Start
     function btnAClick(e){
-
       $('#btnB').prop("disabled", false);
       $('#btnC').prop("disabled", false);
-      if (startTime != 0){
-        active = true;
-      } else {
-        active = true;
-        startTime = new Date();
-      }
+      active = true;
+      startTime = new Date();
+      //if (startTime != 0){
+      //  active = true;
+      //} else {
+      //  active = true;
+      //  startTime = new Date();
+      //}
     }
 
     // ButtonBがクリックされた時の処理
+    //Stop
     function btnBClick(e){
       active = false;
       $('#btnB').prop('disabled', true);
@@ -203,6 +206,7 @@
     }
 
     // ButtonCがクリックされた時の処理
+    //Set
     function btnCClick(e){
         alarm();
         active = false;
@@ -256,7 +260,7 @@
     <button id="btnA">Start</button>  
     <button id="btnB">Stop</button>  
     <button id="btnC">Set</button>  
-    <input type="number" id="minute" value=3 >
-    <input type="number" id="second" value=0 >
+    <input type="number" id="minute" value=0 >
+    <input type="number" id="second" value=15 >
 </body>
 </html>
