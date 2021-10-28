@@ -159,7 +159,8 @@
     var active = false;
     var startTime = 0;
     var period = 0; 
-    var isPause = false;
+    var time = 0;
+    var elapseTime = 0;
   
     
     // ボタンの初期設定
@@ -186,7 +187,7 @@
         //audio.play(); 
         mycanvas1.style.visibility='hidden';
         mycanvas2.style.visibility='visible';
-        
+        elapseTime = 0;
     }
     
 
@@ -197,6 +198,7 @@
       $('#btnC').prop("disabled", false);
       period = 60*parseInt($("#minute").val()) + parseInt($("#second").val());
       active = true;
+      startTime = new Date();
     }
 
     // ButtonBがクリックされた時の処理
@@ -207,13 +209,14 @@
         $('#btnA').prop('disabled', true);
         $('#btnC').prop('disabled', true);
         $('#btnB').html("Resume");
-        
+        elapseTime += parseInt((new Date() - startTime)/1000);
       } else {
         active = true;
+        pause = false;
         $('#btnB').html("Pause");
         $('#btnA').prop('disabled', false);
         $('#btnC').prop('disabled', false);
-        //startTime = new Date();
+        startTime = new Date();
       } 
 
     }
@@ -225,16 +228,19 @@
         active = false;
         period = 60*parseInt($("#minute").val()) + parseInt($("#second").val());
         $("#time").html("経過時間：0");
-        $("#remain").html("残り時間： "+period);
+        var mp = parseInt(period/60);
+        var sp = parseInt(period-mp*60);
+        $("#remain").html("残り時間： "+mp+"分"+sp+"妙");
         $('#btnB').prop('disabled', true);
         $('#btnC').prop('disabled', true);
+        elapseTime = 0;
     }
     
 
     // 繰り返し実行する処理
     function timer(){  
         if (active){
-          var time = parseInt((new Date() - startTime)/1000);
+          time = elapseTime + parseInt((new Date() - startTime)/1000);
           var rest = period - time;
           var m = parseInt(rest/60);
           var s = parseInt(rest-m*60);
