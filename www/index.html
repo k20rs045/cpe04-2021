@@ -157,10 +157,10 @@
     // 変数宣言
      //2.1 演習
     var active = false;
-    var pause = false;
     var startTime = 0;
     var period = 0; 
-
+    var isPause = false;
+  
     
     // ボタンの初期設定
     function init(){
@@ -195,23 +195,27 @@
     function btnAClick(e){
       $('#btnB').prop("disabled", false);
       $('#btnC').prop("disabled", false);
+      period = 60*parseInt($("#minute").val()) + parseInt($("#second").val());
       active = true;
-      startTime = new Date();
-      //if (pause){
-      //  active = true;
-      //  period = tmp;
-      //} else {
-      //  active = true;
-      //  startTime = new Date();
-      //}
     }
 
     // ButtonBがクリックされた時の処理
-    //Stop
+    //Pause
     function btnBClick(e){
-      active = false;
-      //$('#btnB').prop('disabled', true);
-      //$('#btnC').prop('disabled', true);
+      if (active){
+        active = false;
+        $('#btnA').prop('disabled', true);
+        $('#btnC').prop('disabled', true);
+        $('#btnB').html("Resume");
+        
+      } else {
+        active = true;
+        $('#btnB').html("Pause");
+        $('#btnA').prop('disabled', false);
+        $('#btnC').prop('disabled', false);
+        //startTime = new Date();
+      } 
+
     }
 
     // ButtonCがクリックされた時の処理
@@ -266,7 +270,7 @@
     <div id="remain">Remaining time</div>
     <div id="time">Time</div>
     <button id="btnA">Start</button>  
-    <button id="btnB">Stop</button>  
+    <button id="btnB">Pause</button>  
     <button id="btnC">Set</button>  
     <input type="number" id="minute" value=0 >
     <input type="number" id="second" value=15 >
