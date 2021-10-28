@@ -41,6 +41,18 @@
         $('#btnC').click(function(e) {
             btnCClick(e);
         });
+        $('#btnD').click(function(e) {
+            btnDClick(e);
+        });
+        $('#min5btn').click(function(e) {
+            min5btnClick(e);
+        });
+        $('#min1btn').click(function(e) {
+            min1btnClick(e);
+        });
+        $('#sec30btn').click(function(e) {
+            sec30btnClick(e);
+        });
         init();
     });
     
@@ -183,8 +195,8 @@
         };     
         //1.3 演習
         var audio = new Audio();
-        audio.src = "pin.wav";
-        //audio.play(); 
+        audio.src = "Alarm05.wav";
+        audio.play(); 
         mycanvas1.style.visibility='hidden';
         mycanvas2.style.visibility='visible';
         elapseTime = 0;
@@ -194,11 +206,13 @@
     // ButtonAがクリックされた時の処理
     //Start
     function btnAClick(e){
-      $('#btnB').prop("disabled", false);
-      $('#btnC').prop("disabled", false);
-      period = 60*parseInt($("#minute").val()) + parseInt($("#second").val());
-      active = true;
-      startTime = new Date();
+      if ((parseInt($("#minute").val())!=0)||(parseInt($("#second").val())!=0)){
+        $('#btnB').prop("disabled", false);
+        $('#btnC').prop("disabled", false);
+        period = 60*parseInt($("#minute").val()) + parseInt($("#second").val());
+        active = true;
+        startTime = new Date();
+      }
     }
 
     // ButtonBがクリックされた時の処理
@@ -212,7 +226,6 @@
         elapseTime += parseInt((new Date() - startTime)/1000);
       } else {
         active = true;
-        pause = false;
         $('#btnB').html("Pause");
         $('#btnA').prop('disabled', false);
         $('#btnC').prop('disabled', false);
@@ -234,6 +247,21 @@
         $('#btnB').prop('disabled', true);
         $('#btnC').prop('disabled', true);
         elapseTime = 0;
+    }
+
+    function btnDClick(e){
+      $('#btnB').prop("disabled", true);
+      $('#btnC').prop("disabled", true);
+      document.getElementById("minute").value = "0";
+      document.getElementById("second").value = "0";
+      $("#time").html("経過時間：0");
+      $("#remain").html("残り時間： 0分0妙");
+      mycanvas1.style.visibility='hidden';
+      mycanvas2.style.visibility='visible';
+      active = false;
+      elapseTime = 0;
+      period = 0;
+      rest = 0;
     }
     
 
@@ -265,6 +293,49 @@
         }
     } 
 
+    function min5btnClick(e){
+      if (elapseTime != 0) {
+          $('#min5btn').prop("disabled", true);
+          $('#min1btn').prop("disabled", true);
+          $('#sec30btn').prop("disabled", true);
+      } else {
+        let addMin = parseInt($("#minute").val()) + 5;
+        let add5min = addMin.toString();
+        document.getElementById("minute").value=add5min;
+      }
+    }
+
+    function min1btnClick(e){
+      if (elapseTime != 0) {
+          $('#min5btn').prop("disabled", true);
+          $('#min1btn').prop("disabled", true);
+          $('#sec30btn').prop("disabled", true);
+      } else {
+        let addMin = parseInt($("#minute").val()) + 1;
+        let add1min = addMin.toString();
+        document.getElementById("minute").value=add1min;
+      }
+    }
+
+    function sec30btnClick(e){
+      if (elapseTime != 0) {
+          $('#min5btn').prop("disabled", true);
+          $('#min1btn').prop("disabled", true);
+          $('#sec30btn').prop("disabled", true);
+      } else {
+        let addSec = parseInt($("#second").val()) + 30;
+        let add30sec = addSec.toString();
+        document.getElementById("second").value=add30sec;
+        if (parseInt($("#second").val()) > 60){
+          let addMin = parseInt($("#minute").val()) + 1;
+          let add1min = addMin.toString();
+          document.getElementById("minute").value=add1min;
+          let changeSec = parseInt($("#second").val()) - 60;
+          let addCsec = changeSec.toString();
+          document.getElementById("second").value=addCsec;
+        }
+      }
+    }
 
   </script>
 </head>
@@ -277,7 +348,11 @@
     <div id="time">Time</div>
     <button id="btnA">Start</button>  
     <button id="btnB">Pause</button>  
-    <button id="btnC">Set</button>  
+    <button id="btnC">Set</button>
+    <button id="btnD">Reset</button>  
+    <button id="min5btn">5 min</button> 
+    <button id="min1btn">1 min</button>  
+    <button id="sec30btn">30 sec</button> 
     <input type="number" id="minute" value=0 >
     <input type="number" id="second" value=15 >
 </body>
