@@ -210,6 +210,11 @@
       if ((parseInt($("#minute").val())!=0)||(parseInt($("#second").val())!=0)){
         $('#btnB').prop("disabled", false);
         $('#btnC').prop("disabled", false);
+        $('#min5btn').prop("disabled", true);
+        $('#min1btn').prop("disabled", true);
+        $('#sec30btn').prop("disabled", true);
+        $('#minute').prop("disabled", true);
+        $('#second').prop("disabled", true);
         period = 60*parseInt($("#minute").val()) + parseInt($("#second").val());
         active = true;
         startTime = new Date();
@@ -295,39 +300,22 @@
     } 
 
     function min5btnClick(e){
-      if (elapseTime != 0) {
-          $('#min5btn').prop("disabled", true);
-          $('#min1btn').prop("disabled", true);
-          $('#sec30btn').prop("disabled", true);
-      } else {
         let addMin = parseInt($("#minute").val()) + 5;
         let add5min = addMin.toString();
         document.getElementById("minute").value=add5min;
-      }
     }
 
     function min1btnClick(e){
-      if (elapseTime != 0) {
-          $('#min5btn').prop("disabled", true);
-          $('#min1btn').prop("disabled", true);
-          $('#sec30btn').prop("disabled", true);
-      } else {
         let addMin = parseInt($("#minute").val()) + 1;
         let add1min = addMin.toString();
         document.getElementById("minute").value=add1min;
-      }
     }
 
     function sec30btnClick(e){
-      if (elapseTime != 0) {
-          $('#min5btn').prop("disabled", true);
-          $('#min1btn').prop("disabled", true);
-          $('#sec30btn').prop("disabled", true);
-      } else {
         let addSec = parseInt($("#second").val()) + 30;
         let add30sec = addSec.toString();
         document.getElementById("second").value=add30sec;
-        if (parseInt($("#second").val()) > 60){
+        if (parseInt($("#second").val()) >= 60){
           let addMin = parseInt($("#minute").val()) + 1;
           let add1min = addMin.toString();
           document.getElementById("minute").value=add1min;
@@ -335,7 +323,6 @@
           let addCsec = changeSec.toString();
           document.getElementById("second").value=addCsec;
         }
-      }
     }
 
   </script>
