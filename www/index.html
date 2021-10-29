@@ -201,6 +201,11 @@
         mycanvas2.style.visibility='visible';
         $('#btnB').prop('disabled', true);
         elapseTime = 0;
+      $('#min5btn').prop("disabled", false);
+      $('#min1btn').prop("disabled", false);
+      $('#sec30btn').prop("disabled", false);
+      $('#minute').prop("disabled", false);
+      $('#second').prop("disabled", false);
     }
     
 
@@ -258,6 +263,11 @@
     function btnDClick(e){
       $('#btnB').prop("disabled", true);
       $('#btnC').prop("disabled", true);
+      $('#min5btn').prop("disabled", false);
+      $('#min1btn').prop("disabled", false);
+      $('#sec30btn').prop("disabled", false);
+      $('#minute').prop("disabled", false);
+      $('#second').prop("disabled", false);
       document.getElementById("minute").value = "0";
       document.getElementById("second").value = "0";
       $("#time").html("経過時間：0");
